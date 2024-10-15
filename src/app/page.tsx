@@ -1,95 +1,62 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import styles from "./styles.module.scss";
+
+const STEPS = [
+  {
+    message:
+      "This is a simple project to demonstrate my skills with the Vanilla Framework, created for the Canonical interview.",
+    buttonText: "Wait, did you really make a project just for the interview?",
+  },
+  {
+    message:
+      "It's not desperation... It's enthusiasm! I just want to demonstrate my ability to work using simplicity, creativity, and clarity.",
+    buttonText: "So, what do you think about working with Vanilla?",
+  },
+  {
+    message:
+      "Vanilla is great for creating clean, responsive layouts with minimal effort. It’s lightweight and perfect for standardized projects.",
+    buttonText: "And how long did it take to build this?",
+  },
+  {
+    message:
+      "It took just a few hours! With the right tools and focus, efficiency is key.",
+    buttonText: "Okay, I think I'm ready for Canonical now!",
+  },
+];
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setStep((prevStep) => (prevStep + 1) % STEPS.length);
+    }, 2000);
+  };
+
+  return (
+    <main className="p-strip--light">
+      <div className="row">
+        <div className="col-8@small col-6@medium col-4@large">
+          <h1>Hi, I&apos;m João!</h1>
+          <p>
+            Frontend developer with experience in React, Next.js, and
+            TypeScript.
+          </p>
+          <p>{STEPS[step].message}</p>
+          <button
+            className={`p-button--positive ${loading ? styles["is-loading"] : ""}`}
+            onClick={handleClick}
+            disabled={loading}
           >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+            {loading ? "Loading..." : STEPS[step].buttonText}
+          </button>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }

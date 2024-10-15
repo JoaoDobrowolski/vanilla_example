@@ -1,0 +1,23 @@
+// Import the framework
+@import 'node_modules/vanilla-framework';
+
+// Include all of Vanilla Framework
+@include vanilla;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f7f7f7;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
