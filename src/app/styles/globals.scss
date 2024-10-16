@@ -1,7 +1,4 @@
-// Import the framework
-@import 'node_modules/vanilla-framework';
-
-// Include all of Vanilla Framework
+@import 'vanilla-framework';
 @include vanilla;
 
 html, body {
@@ -16,7 +13,7 @@ html, body {
 
 body {
   font-family: sans-serif;
-  background-color: #f7f7f7;
+  background-color: #f1f0e5;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
