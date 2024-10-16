@@ -5,7 +5,7 @@ import classnames from "classnames";
 import styles from "./styles.module.scss";
 
 const INITIAL_MESSAGE =
-  "Did you know that by reading words like this, we can actually process them faster? If in our first encounter you've already learned something new, imagine what we could achieve together if I were part of the team!";
+  "Did you know that by using the Rapid Serial Visual Presentation technique, we can actually process words more efficiently? If in our first encounter you've already learned something new, imagine what we could achieve together if I were part of the team!";
 
 export default function Home() {
   const [inputText, setInputText] = useState<string>(INITIAL_MESSAGE);
@@ -57,11 +57,11 @@ export default function Home() {
         case 1:
           return { perLetter: 60, min: 120, max: 200 };
         case 2:
-          return { perLetter: 50, min: 110, max: 170 };
+          return { perLetter: 50, min: 110, max: 180 };
         case 3:
-          return { perLetter: 40, min: 100, max: 150 };
+          return { perLetter: 40, min: 100, max: 160 };
         case 4:
-          return { perLetter: 30, min: 90, max: 130 };
+          return { perLetter: 30, min: 90, max: 140 };
         case 5:
           return { perLetter: 24, min: 80, max: 110 };
         default:
