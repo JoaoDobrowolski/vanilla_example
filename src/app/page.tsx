@@ -3,7 +3,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 
 const INITIAL_MESSAGE =
-  "This is a simple project to demonstrate my quick reading tool.";
+  "Did you know that by reading words like this, we can actually process them faster? If in our first encounter you've already learned something new, imagine what the team would miss out on by not hiring me!";
 
 export default function Home() {
   const [inputText, setInputText] = useState<string>(INITIAL_MESSAGE);
@@ -11,7 +11,7 @@ export default function Home() {
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
   const [started, setStarted] = useState<boolean>(false);
   const [displayedWord, setDisplayedWord] = useState<string>("");
-  const [speed, setSpeed] = useState<number>(3);
+  const [speed, setSpeed] = useState<number>(1);
 
   useEffect(() => {
     setWords(inputText.split(" "));
@@ -21,23 +21,23 @@ export default function Home() {
     const getDelaysBySpeed = () => {
       switch (speed) {
         case 1:
-          return { perLetter: 120, min: 300, max: 500 };
-        case 2:
-          return { perLetter: 100, min: 240, max: 400 };
-        case 3:
           return { perLetter: 60, min: 120, max: 200 };
-        case 4:
+        case 2:
+          return { perLetter: 50, min: 110, max: 170 };
+        case 3:
           return { perLetter: 40, min: 90, max: 150 };
+        case 4:
+          return { perLetter: 30, min: 80, max: 130 };
         case 5:
           return { perLetter: 20, min: 50, max: 100 };
         default:
           return { perLetter: 60, min: 120, max: 200 };
       }
     };
+    const { perLetter, min, max } = getDelaysBySpeed();
 
     if (started && currentWordIndex < words.length) {
       const currentWord = words[currentWordIndex];
-      const { perLetter, min, max } = getDelaysBySpeed();
       let delay = currentWord.length * perLetter;
       delay = Math.max(min, Math.min(max, delay));
       const timer = setTimeout(() => {
@@ -53,7 +53,7 @@ export default function Home() {
         setStarted(false);
         setCurrentWordIndex(0);
         setDisplayedWord("");
-      }, 200);
+      }, max);
 
       return () => clearTimeout(timer);
     }
@@ -84,14 +84,26 @@ export default function Home() {
       <div className="row">
         <div className="u-align--center">
           <h1>Hi, I&apos;m João!</h1>
-          <h2>This is my Quick Reading Project</h2>
+          <h2 className="p-strip">
+            This project was created to show my interest in joining Canonical.
+          </h2>
+          <h2>
+            I built it using the Vanilla Framework to enthusiastically
+            demonstrate that I&apos;m ready and excited for the role.
+          </h2>
           <div className="p-strip">
             <div>
-              <textarea value={inputText} onChange={handleTextChange} />
+              <textarea
+                value={inputText}
+                onChange={handleTextChange}
+                style={{
+                  height: "120px",
+                }}
+              />
             </div>
           </div>
           <div>
-            <label>Reading Speed:</label>
+            <h3>Reading Speed:</h3>
             <div>
               {[1, 2, 3, 4, 5].map((value) => (
                 <button
@@ -116,7 +128,7 @@ export default function Home() {
             {started ? "Stop" : "Start"}
           </button>
 
-          <p className="u-text--large">{displayedWord}</p>
+          <h4>{displayedWord}</h4>
         </div>
       </div>
     </main>

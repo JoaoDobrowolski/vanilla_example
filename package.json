@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-css": "sass -w --load-path=node_modules src:dist --style=compressed"
   },
   "dependencies": {
     "next": "14.2.15",
