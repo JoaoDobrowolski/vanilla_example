@@ -110,7 +110,7 @@ export default function Home() {
 
   // Handles manual reading timer toggle and resets time when activated
   const handleManualTimerToggle = () => {
-    setManualTimerActive(!manualTimerActive);
+    setManualTimerActive((prev) => !prev);
     if (!manualTimerActive) setManualTime(0);
   };
 
